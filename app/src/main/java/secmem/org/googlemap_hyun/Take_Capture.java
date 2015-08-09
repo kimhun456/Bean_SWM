@@ -37,15 +37,24 @@ public class Take_Capture {
 
     public void takeScreenshot(View view) {
 
-        //전체를 스크린샷 찍을 때
-        //View rootView = findViewById(android.R.id.content).getRootView();
         view.setDrawingCacheEnabled(true);
         saveBitmap(view.getDrawingCache());
 
     }
 
     public void saveBitmap(Bitmap bitmap) {
-        File imagePath = new File(Environment.getExternalStorageDirectory() + "/Pictures/screen_swm.png");
+
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Screenshots";
+        File file = new File(path);
+
+        if(!file.exists()){
+            file.mkdirs();
+        }
+
+
+        File imagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Screenshots/beenzido.png");
+
+
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imagePath);
