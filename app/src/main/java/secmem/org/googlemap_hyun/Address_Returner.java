@@ -90,6 +90,24 @@ public class Address_Returner {
     }
 
 
+    public String get_do_name(Context context, double latitude, double longitude){
+        String result = get_all_address(context,latitude,longitude);
+
+        String address = " Fail to load Address";
+
+        StringTokenizer stringTokenizer = new StringTokenizer(result);
+        while(stringTokenizer.hasMoreTokens()){
+            String st = stringTokenizer.nextToken();
+            int length = st.length();
+
+            if(st.substring(length-1,length).equals("도")){
+                return st;
+            }
+        }
+
+        return address;
+    }
+
 
 
 }
