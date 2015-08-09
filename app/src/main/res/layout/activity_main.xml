@@ -55,7 +55,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="map"
+            android:text="screeenshoooott"
             android:id="@+id/map_btn"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
