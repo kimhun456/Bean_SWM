@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by HyunJae on 2015-08-10.
@@ -44,7 +46,11 @@ public class Take_Capture {
 
     public void saveBitmap(Bitmap bitmap) {
 
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Screenshots";
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_hhmmss");
+
+        String namePostfix = format.format(new Date());
+
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Beenzido";
         File file = new File(path);
 
         if(!file.exists()){
@@ -52,7 +58,7 @@ public class Take_Capture {
         }
 
 
-        File imagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Screenshots/beenzido.png");
+        File imagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Beenzido/beenzido_"+ namePostfix +".png");
 
 
         FileOutputStream fos;
@@ -67,7 +73,5 @@ public class Take_Capture {
 
         }
     }
-
-
 
 }
