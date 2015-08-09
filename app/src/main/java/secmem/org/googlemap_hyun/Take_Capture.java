@@ -1,5 +1,6 @@
 package secmem.org.googlemap_hyun;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.view.View;
@@ -10,10 +11,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by HyunJae on 2015-08-10.
- * 사용법
- *    View 파라미터에는 Layout을 넣어주면 Layout이 찍인다
+/***************사용법 *************************
+ *
+ *    View 파라미터에는 Layout을 넣어주면 스크린샷이 찍인다
+ *
+ *    path 는 /DCIM/Beenzido/image명
+ *
  *   Take_Capture.getInstance().takeScreenshot(linearLayout);
  *
  *
@@ -21,7 +24,7 @@ import java.util.Date;
  *    View rootView = findViewById(android.R.id.content).getRootView();
  *    Take_Capture.getInstance().takeScreenshot(rootView);
  *
- *    를 실행시킨다.
+ *    을 실행시킨다.
  */
 
 
@@ -37,14 +40,14 @@ public class Take_Capture {
     private Take_Capture(){}
 
 
-    public void takeScreenshot(View view) {
+    public String takeScreenshot(Context context ,View view) {
 
         view.setDrawingCacheEnabled(true);
-        saveBitmap(view.getDrawingCache());
+        return saveBitmap(context, view.getDrawingCache());
 
     }
 
-    public void saveBitmap(Bitmap bitmap) {
+    public String saveBitmap(Context context, Bitmap bitmap) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_hhmmss");
 
@@ -56,10 +59,9 @@ public class Take_Capture {
         if(!file.exists()){
             file.mkdirs();
         }
+        path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Beenzido/beenzido_"+ namePostfix +".png";
 
-
-        File imagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Beenzido/beenzido_"+ namePostfix +".png");
-
+        File imagePath = new File(path);
 
         FileOutputStream fos;
         try {
@@ -67,11 +69,15 @@ public class Take_Capture {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.flush();
             fos.close();
+
         } catch (FileNotFoundException e) {
 
         } catch (IOException e) {
 
         }
+
+        return path;
+
     }
 
 }
