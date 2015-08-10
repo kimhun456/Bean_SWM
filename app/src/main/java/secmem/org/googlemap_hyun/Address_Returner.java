@@ -108,6 +108,24 @@ public class Address_Returner {
         return address;
     }
 
+    public boolean isKorea(Context context, double latitude, double longitude){
+
+        String result = get_all_address(context,latitude,longitude);
+
+        StringTokenizer stringTokenizer = new StringTokenizer(result);
+
+        while(stringTokenizer.hasMoreTokens()){
+            String st = stringTokenizer.nextToken();
+            int length = st.length();
+
+            if(st.substring(length-2,length).equals("남한")){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 
 }
